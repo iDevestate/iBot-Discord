@@ -1,0 +1,24 @@
+{
+  "name": "ibot-discord",
+  "version": "1.0.0",
+  "description": "Very simple bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "iDevastate#7393",
+  "license": "ISC",
+  "dependencies": {
+    "after-load": "^1.0.4",
+    "discord.js": "^11.4.2",
+    "ffmpeg": "0.0.4",
+    "ms": "^2.1.1",
+    "node.js": "0.0.0",
+    "opusscript": "0.0.6",
+    "querystring": "^0.2.0",
+    "r2": "^2.0.1",
+    "simple-youtube-api": "^5.0.2",
+    "superagent": "^4.0.0-beta.5",
+    "ytdl-core": "^0.27.0"
+  }
+}
