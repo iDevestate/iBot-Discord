@@ -23,7 +23,7 @@ fs.readdir("./commands/", (err, files) => {
 
 bot.on("ready", async () => {
   console.log(`${bot.user.username} is online on ${bot.guilds.size} servers!`);
-  bot.user.setActivity("iBot developemnt", {type: "PLAYINGS"});
+  bot.user.setActivity("iBot developement", {type: "PLAYING"});
 
 });
 
@@ -32,10 +32,11 @@ bot.on("message", async message => {
   if(message.channel.type === "dm") return;
 
   let prefix = botconfig.prefix;
-  let messageArray = message.content.split(" ");
-  let cmd = messageArray[0];
-  let args = messageArray.slice(1);
-  let commandfile = bot.commands.get(cmd.slice(prefix.length));
+  if (!message.content.startsWith(prefix)) return; // MonoxNote: checking if it starts with prefix or not
+  let messageArray = message.content.split(/ +/g); // MonoxNote: changed to regex because it more effective
+  let cmd = messageArray.shift().slice(prefix.length) // MonoxNote: changed again
+  let args = messageArray
+  let commandfile = bot.commands.get(cmd);
   if(commandfile) commandfile.run(bot,message,args);
 
 });
