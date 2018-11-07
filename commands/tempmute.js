@@ -7,7 +7,7 @@ module.exports.run = async (bot, message, args) => {
   if(!tomute) return message.reply("Couldn't find user.");
   if(!message.member.hasPermission("MUTE_MEMBERS")) return message.channel.send(`You ${message.author} don't have permission to mute!`);
   if(tomute.id === message.author.id) return message.channel.send("You can't mute yourself!");
-  if(tomute.hasPermission("ADMINISTRATOR")) return message.reply("Can't mute them!");
+  if(tomute.hasPermission("MANAGE_CHANNELS")) return message.reply("Can't mute them!");
   let muterole = message.guild.roles.find(`name`, "muted");
 
   if(!muterole) {
