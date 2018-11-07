@@ -8,7 +8,7 @@ module.exports.run = async (bot, message, args) => {
  let wUser = message.guild.member(message.mentions.users.first()) || message.guild.mmembers.get(args[0]);
  if(!wUser) return message.reply("Couldn't find user!");
  let reason = args.join(" ").slice(22);
- if(wUser.hasPermission("ADMINISTRATOR")) return message.reply("Too cool to warn!");
+ if(wUser.hasPermission("MANAGE_CHANNELS")) return message.reply("Too cool to warn!");
  if(!reason) return message.reply("Add a reason!");
 
 
