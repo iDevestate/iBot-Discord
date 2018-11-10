@@ -1,7 +1,7 @@
 const botconfig = require("./botconfig.json");
 const Discord = require("discord.js");
 const fs = require("fs");
-const token = process.env.token;
+const token = botconfig.token;
 const bot = new Discord.Client({disableEveryone: true});
 bot.commands = new Discord.Collection();
 let coins = require("./coins.json");
@@ -24,7 +24,7 @@ fs.readdir("./commands/", (err, files) => {
 
 bot.on("ready", async () => {
   console.log(`${bot.user.username} is online on ${bot.guilds.size} servers!`);
-  bot.user.setActivity("iBot developement", {type: "PLAYING"});
+  bot.user.setActivity("Great stuff!", {type: "WATCHING"});
 
 });
 
