@@ -28,6 +28,18 @@ bot.on("ready", async () => {
 
 });
 
+bot.on("guildMemberAdd", async member => {
+    let welcomechannel = member.guild.channel.find('name', "welcome_leave");
+    welcomechannel.send(`Look out! ${member} has joined the party!`);
+});
+
+bot.on("guildMemberRemove", async member => {
+     let leavechannel = member.guild.channel.find('name', "welcome_leave");
+     leavechannel.send(`Oh no! ${member} has left us =(`);
+});
+
+
+
 bot.on("message", async message => {
   if(message.author.bot) return;
   if(message.channel.type === "dm") return;
