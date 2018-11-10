@@ -44,7 +44,15 @@ bot.on("message", async message => {
   if(message.author.bot) return;
   if(message.channel.type === "dm") return;
 
-  let prefix = botconfig.prefix;
+  let prefixes = JSON.parse(fs.readFileSync("./prefixes.json", "utf8"));
+
+  if(!prefixes[message.guild.id]){
+    prefixes[message.guild.id] = {
+      prefixes: botconfig.prefix
+    };
+  }
+
+  let prefix = prefixes[message.guild.id].prefixes;
   if (!message.content.startsWith(prefix)) return; // MonoxNote: checking if it starts with prefix or not
   let messageArray = message.content.split(/ +/g); // MonoxNote: changed to regex because it more effective
   let cmd = messageArray.shift().slice(prefix.length) // MonoxNote: changed again
