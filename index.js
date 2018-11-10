@@ -1,10 +1,10 @@
 const botconfig = require("./botconfig.json");
-//const tokenfile = require("./token.json");
 const Discord = require("discord.js");
 const fs = require("fs");
 const token = process.env.token;
 const bot = new Discord.Client({disableEveryone: true});
 bot.commands = new Discord.Collection();
+let coins = require("./coins.json");
 
 fs.readdir("./commands/", (err, files) => {
 
@@ -45,12 +45,31 @@ bot.on("message", async message => {
   if(message.channel.type === "dm") return;
 
   let prefixes = JSON.parse(fs.readFileSync("./prefixes.json", "utf8"));
-
   if(!prefixes[message.guild.id]){
     prefixes[message.guild.id] = {
       prefixes: botconfig.prefix
     };
   }
+
+  if(!coins[message.author.id]){
+    coins[message.author.id] = {
+      coins: 0
+    };
+  }
+
+  let coinAmt = Math.floor(Math.random() * 15) + 1;
+  let baseAmt = Math.floor(Math.random() * 15) + 1;
+  console.log(`${"coinAmt"} ; ${"baseAmt"}`);
+
+  if(coinAmt === baseAmt) {
+    coins[message.author.id] = {
+      coins: coins[message.author.id].coins + coinAmt
+    };
+  fs.writeFile("./coins.json", JSON.stringify(coins), (err) => {
+    if (err) console.log(err)
+  });
+  }
+
 
   let prefix = prefixes[message.guild.id].prefixes;
   if (!message.content.startsWith(prefix)) return; // MonoxNote: checking if it starts with prefix or not
